@@ -1,0 +1,26 @@
+defaults:
+  security:
+    user: "1000:1000"
+    readOnly: true
+    capDrop:
+      - ALL
+    pidsLimit: 256
+
+applications:
+  - project: Example-QA
+    application: example-app
+    service: example-qa-example-app-abc123
+    mode: observe
+    security:
+      env:
+        HOME: /home/ubuntu
+        NPM_CONFIG_CACHE: /tmp/npm-cache
+
+  - project: Example-PROD
+    application: example-app
+    service: example-prod-example-app-def456
+    mode: enforce
+    security:
+      env:
+        HOME: /home/ubuntu
+        NPM_CONFIG_CACHE: /tmp/npm-cache
