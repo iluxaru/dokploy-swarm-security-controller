@@ -1,0 +1,30 @@
+[Unit]
+Description=Dokploy Docker Swarm Security Controller
+Documentation=man:systemd.service(5)
+Requires=docker.service
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/dokploy-security-controller
+EnvironmentFile=/etc/dokploy-security-controller.env
+ExecStart=/opt/dokploy-security-controller/.venv/bin/python /opt/dokploy-security-controller/controller.py
+
+Restart=on-failure
+RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=dokploy-security-controller
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/run
+
+[Install]
+WantedBy=multi-user.target
