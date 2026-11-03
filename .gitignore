@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+config/applications.yaml
+*.key
+*.pem
+
+# Docker service backups
+backups/
+*.spec.json
+*.inspect.json
